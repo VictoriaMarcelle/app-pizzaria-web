@@ -1,0 +1,73 @@
+<div>
+  <h4 id="subtitle">{{ !productId ? 'Novo' : isView ? 'Visualizar' : 'Editar' }}</h4>
+  <h1>Produto</h1>
+</div>
+<mat-card class="loading-container">
+  <div class="loading" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <form [formGroup]="form" (submit)="register()">
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="16px">
+      <mat-grid-tile colspan="1">
+        <mat-form-field class="full-width form-group" >
+          <mat-label>Nome</mat-label>
+          <input
+            type="text"
+            formControlName="nome"
+            matInput
+            required
+          />
+          <mat-hint *ngIf="getErrors('nome') !== ''" class="input-errors">{{ getErrors('nome') }}</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field class="full-width form-group" >
+          <mat-label>Valor</mat-label>
+          <span matPrefix>R$ &nbsp;</span>
+          <input
+            type="number"
+            formControlName="valor"
+            matInput
+            required
+          />
+          <mat-hint *ngIf="getErrors('valor') !== ''" class="input-errors">{{ getErrors('valor', 'valor') }}</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field class="full-width form-group">
+          <mat-label>Tamanho produto</mat-label>
+          <mat-select formControlName="tamanho" required>
+            <mat-option *ngFor="let tamanho of tamanhosProduto" [value]="tamanho.value">
+              {{tamanho.label}}
+            </mat-option>
+          </mat-select>
+          <mat-hint *ngIf="getErrors('tamanho') !== ''" class="input-errors">{{ getErrors('tamanho') }}</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1">
+        <mat-form-field class="full-width form-group" >
+          <mat-label>Quantidade fatias</mat-label>
+          <input
+            type="number"
+            formControlName="qtdFatias"
+            matInput
+            required
+          />
+          <mat-hint *ngIf="getErrors('qtdFatias') !== ''" class="input-errors">{{ getErrors('qtdFatias', 'quantidade de fatias') }}</mat-hint>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-form-field class="full-width form-group" >
+      <mat-label>Descrição</mat-label>
+      <textarea formControlName="descricao" matInput rows="4"></textarea>
+      <mat-hint *ngIf="getErrors('descricao') !== ''" class="input-errors">{{ getErrors('descricao', 'descrição') }}</mat-hint>
+    </mat-form-field>
+    <div class="d-flex justify-end">
+      <button mat-stroked-button color="primary"  type="reset" (click)="goBack()">Voltar</button>
+      <button mat-raised-button color="primary" class="ml-4" type="submit" *ngIf="!isView">
+        Salvar
+      </button>
+    </div>
+  </form>
+</mat-card>

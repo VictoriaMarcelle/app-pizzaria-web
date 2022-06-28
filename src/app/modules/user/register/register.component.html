@@ -1,0 +1,52 @@
+<div class="loading" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+<div>
+  <mat-card-title>Cadastro</mat-card-title>
+  <mat-card-subtitle>E-Pizzaria</mat-card-subtitle>
+
+  <form [formGroup]="form" (submit)="register()">
+    <mat-form-field class="full-width form-group" >
+      <mat-label>Nome</mat-label>
+      <input
+        type="text"
+        formControlName="nome"
+        matInput
+        required
+      />
+      <mat-hint *ngIf="getErrors('nome') !== ''" class="input-errors">{{ getErrors('nome') }}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" >
+      <mat-label>E-email</mat-label>
+      <input
+        type="email"
+        name="email"
+        formControlName="email"
+        matInput
+        required
+      />
+      <mat-hint *ngIf="getErrors('email') !== ''" class="input-errors">{{ getErrors('email', 'e-mail') }}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="full-width form-group" >
+      <mat-label>Senha</mat-label>
+      <input
+        [type]="inputPasswordType"
+        name="senha"
+        formControlName="senha"
+        matInput
+        required
+      />
+      <mat-icon matSuffix (click)="changeInputPasswordType()" class="cursor-pointer">{{isPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-hint *ngIf="getErrors('senha') !== ''" class="input-errors">{{ getErrors('senha') }}</mat-hint>
+    </mat-form-field>
+
+    <div class="d-flex justify-end">
+      <button mat-stroked-button color="primary"  type="reset" (click)="goBack()">Voltar</button>
+      <button mat-raised-button color="primary" class="ml-4" type="submit">
+        Salvar
+      </button>
+    </div>
+  </form>
+</div>
