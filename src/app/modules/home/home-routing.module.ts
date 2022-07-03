@@ -20,10 +20,6 @@ const routes: Routes = [
       {
         path: ':id/editar',
         component: FormCompoment
-      },
-      {
-        path: ':id/visualizar',
-        component: FormCompoment
       }
     ]
   }

@@ -53,6 +53,9 @@
         <button mat-icon-button [routerLink]="[element.id, 'editar']">
           <mat-icon>edit</mat-icon>
         </button>
+        <button mat-icon-button (click)="deleteProduct(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
     </ng-container>
 
